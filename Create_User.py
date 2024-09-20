@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import Select
     
 driver = webdriver.Chrome()
 driver.maximize_window()
-#driver.implicitly_wait(60)
+driver.implicitly_wait(60)
 
         
 wb = load_workbook("ACG_Common_Workbook.xlsx")
