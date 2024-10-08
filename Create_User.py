@@ -69,8 +69,10 @@ for i in range(start_user, last_user):
 
     timeout = 10
     try:
-        new_user_nxt = EC.element_to_be_clickable((By.XPATH,"//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div[1]/button[2]"))
-        WebDriverWait(driver,timeout).until(new_user_nxt)
+        #new_user_nxt = EC.element_to_be_clickable((By.XPATH,"//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div[1]/button[2]"))
+        #WebDriverWait(driver,timeout).until(new_user_nxt)
+        new_user_can = EC.element_to_be_clickable((By.XPATH,"//*[@id='root']/div/div/div[2]/div[2]/div/div[3]/div[1]/button[1]"))
+        WebDriverWait(driver,timeout).until(new_user_can)
     except TimeoutException:
         print("Create user page_nxt: Timed out waiting for page to load")
     
