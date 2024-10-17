@@ -46,14 +46,14 @@ public class add_Product100 {
 	            Row row1 = sheet1.getRow(2);
  
             	    String userName = getCellValueAsString(row1.getCell(1));
-                    String password = getCellValueAsString(row1.getCell(2));
+                    String password1 = getCellValueAsString(row1.getCell(2));
  
                     WebElement email = driver.findElement(By.xpath("//input[@placeholder='Enter username']"));
                     email.sendKeys(userName);
                     Thread.sleep(3000);
  
                     WebElement password = driver.findElement(By.xpath("//input[@placeholder='Enter a password']"));
-                    password.sendKeys(password);
+                    password.sendKeys(password1);
                     Thread.sleep(3000);
 
 	            WebElement login = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[4]/div/div[2]/div/button"));
