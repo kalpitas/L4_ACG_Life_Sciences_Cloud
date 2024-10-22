@@ -5,18 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-def get_cell_value_as_string(cell):
-    if cell is None:
-        return ""
-    if cell.data_type == 's':
-        return cell.value
-    elif cell.data_type == 'n':
-        return str(int(cell.value))  # Handle numeric values as integers
-    elif cell.data_type == 'b':
-        return str(cell.value)
-    elif cell.data_type == 'f':
-        return cell.value
-    return ""
 
 def main():
 
@@ -55,7 +43,7 @@ def main():
     # Loop through all the rows in the Excel sheet
 
     print(sheet.max_row+1)
-    for rowIndex in range(1, sheet.max_row + 1):
+    for i in range(1, sheet.max_row + 1):
         # Click 'Add Product' button at the beginning of each loop
         time.sleep(3)
 
