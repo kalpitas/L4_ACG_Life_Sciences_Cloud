@@ -43,7 +43,7 @@ def main():
     # Loop through all the rows in the Excel sheet
 
     print(sheet.max_row+1)
-    for i in range(1, sheet.max_row + 1):
+    for i in range(start_row, sheet.max_row + 1):
         # Click 'Add Product' button at the beginning of each loop
         time.sleep(3)
 
