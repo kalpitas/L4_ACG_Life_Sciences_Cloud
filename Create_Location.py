@@ -8,30 +8,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# Helper function to get cell values
-def get_cell_value_as_string(cell):
-    if cell is None:
-        return ""
-    if cell.data_type == 's':  # STRING
-        return cell.value
-    elif cell.data_type == 'n':  # NUMERIC
-        return str(int(cell.value))  # Convert to integer
-    elif cell.data_type == 'b':  # BOOLEAN
-        return str(cell.value)
-    elif cell.data_type == 'f':  # FORMULA
-        return str(cell.value)
-    return ""
-
-
 def main():
 
-    driver = webdriver.Chrome("D:\\Kalpita_Jenkins\\L4\\chromedriver.exe")
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.implicitly_wait(60)
 
-    workbook = load_workbook("D:\\Kalpita_Jenkins\\L4\\ACG_Common_Workbook.xlsx")
+    workbook = load_workbook("ACG_Common_Workbook.xlsx")
     sheet = workbook["partner"]
     url_login_cred = workbook["URL_Login_cred_Tenant"]
+    
+    start_row = 2
 
     time.sleep(3)
     driver.get("https://proud-mud-040601f00.4.azurestaticapps.net/")
@@ -54,7 +41,7 @@ def main():
 
 
     # Loop through all the rows in the Excel sheet
-    for row_index in range(1, sheet.max_row + 1):  # Adjusting for 0-indexing
+    for i in range(start_row, sheet.max_row + 1):  # Adjusting for 0-indexing
         # Click 'New Location' button at the beginning of each loop
 
         timeout = 10
@@ -68,21 +55,20 @@ def main():
         
         driver.find_element(By.XPATH,"//*[@id='root']/div/div/div[2]/div[2]/div/div/div[2]/b").click()
 
-        row = sheet[row_index + 1]  # Adjusting for header row
 
-        location_name = get_cell_value_as_string(row[0])
-        location_id = get_cell_value_as_string(row[1])
-        state = get_cell_value_as_string(row[2])
-        city = get_cell_value_as_string(row[3])
-        address = get_cell_value_as_string(row[4])
-        postal_code = get_cell_value_as_string(row[5])
-        contact_person = get_cell_value_as_string(row[6])
-        email_id = get_cell_value_as_string(row[7])
-        phone_number = get_cell_value_as_string(row[8])
-        website = get_cell_value_as_string(row[9])
-        entity = get_cell_value_as_string(row[10])
-        bus_entity = get_cell_value_as_string(row[11])
-        loc_identifier_ty = get_cell_value_as_string(row[12])
+        location_name = sheet.cell(row = i, column = 1).value
+        location_id = sheet.cell(row = i, column = 2).value
+        state = sheet.cell(row = i, column = 3).value
+        city = sheet.cell(row = i, column = 4).value
+        address = sheet.cell(row = i, column = 5).value
+        postal_code = sheet.cell(row = i, column = 6).value
+        contact_person = sheet.cell(row = i, column = 7).value
+        email_id = sheet.cell(row = i, column = 8).value
+        phone_number = sheet.cell(row = i, column = 9).value
+        website = sheet.cell(row = i, column = 10).value
+        entity = sheet.cell(row = i, column = 11).value
+        bus_entity = sheet.cell(row = i, column = 12).value
+        loc_identifier_ty = sheet.cell(row = i, column = 13).value
 
         # Fill in the location details
         locname = driver.find_element(By.XPATH, "//input[@placeholder='Enter location name']")
@@ -97,6 +83,8 @@ def main():
         business_entity = Select(driver.find_element(By.XPATH, "//select[@name='locName']"))
         business_entity.select_by_visible_text(str(bus_entity))
         
+        time.sleep(2)
+        
         element = driver.find_element(By.XPATH, "//select[@name='locationIdType']")
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
@@ -105,6 +93,8 @@ def main():
 
         identifier = driver.find_element(By.XPATH, "//input[@name='locationId']")
         identifier.send_keys(location_id)
+        
+        time.sleep(2)
 
         next1 = driver.find_element(By.XPATH, "//button[text()='Next']")
         next1.click()

@@ -20,13 +20,15 @@ def get_cell_value_as_string(cell):
 
 def main():
 
-    driver = webdriver.Chrome("D:\\Kalpita_Jenkins\\L4\\chromedriver.exe")
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.implicitly_wait(60)
 
-    workbook = load_workbook("D:\\Kalpita_Jenkins\\L4\\ACG_Common_Workbook.xlsx")
+    workbook = load_workbook("ACG_Common_Workbook.xlsx")
     sheet = workbook["Product"]
     url_login_cred = workbook["URL_Login_cred_Tenant"]
+
+    start_row = 2
 
     time.sleep(3)
     driver.get("https://proud-mud-040601f00.4.azurestaticapps.net/")
@@ -59,19 +61,19 @@ def main():
 
         driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div[2]/div[2]/div/div/div[2]/b").click()
 
-        row = sheet[rowIndex + 1]  # +1 for header
-        ProductIdentifier = get_cell_value_as_string(row[0])
-        productName = get_cell_value_as_string(row[1])
-        productDescription = get_cell_value_as_string(row[2])
-        manufacturerName = get_cell_value_as_string(row[3])
-        GS1CompanyPrefix = get_cell_value_as_string(row[4])
-        GLN = get_cell_value_as_string(row[5])
-        ProductIdentifier2 = get_cell_value_as_string(row[6])
-        packagingLevelIndicator = get_cell_value_as_string(row[7])
-        genericName = get_cell_value_as_string(row[8])
-        MinTemp = get_cell_value_as_string(row[9])
-        weight = get_cell_value_as_string(row[10])
-        strength = get_cell_value_as_string(row[11])
+        
+        ProductIdentifier = sheet.cell(row = i, column = 1).value
+        productName = sheet.cell(row = i, column = 2).value
+        productDescription = sheet.cell(row = i, column = 3).value
+        manufacturerName = sheet.cell(row = i, column = 4).value
+        GS1CompanyPrefix = sheet.cell(row = i, column = 5).value
+        GLN = sheet.cell(row = i, column = 6).value
+        ProductIdentifier2 = sheet.cell(row = i, column = 7).value
+        packagingLevelIndicator = sheet.cell(row = i, column = 8).value
+        genericName = sheet.cell(row = i, column = 9).value
+        MinTemp = sheet.cell(row = i, column = 10).value
+        weight = sheet.cell(row = i, column = 11).value
+        strength = sheet.cell(row = i, column = 12).value
 
         productIdentifierType = driver.find_element(By.XPATH, "//select[@name= 'productIdentifierType']")
         Select(productIdentifierType).select_by_index(2)
