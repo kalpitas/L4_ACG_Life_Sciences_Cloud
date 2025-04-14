@@ -54,5 +54,5 @@ for i in range(start_row_log, last_row_log):
     driver.find_element(By.XPATH, "//*[@id='root']/div/div/div[4]/div/div[2]/div/button").click()
     
     time.sleep(5)
-
+    print("done")
 
