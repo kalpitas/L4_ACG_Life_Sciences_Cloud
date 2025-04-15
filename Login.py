@@ -56,4 +56,5 @@ for i in range(start_row_log, last_row_log):
     time.sleep(5)
     print("done")
     print("to pull data")
+    print("ti test branches")
 
