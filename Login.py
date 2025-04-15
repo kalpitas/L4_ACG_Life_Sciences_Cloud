@@ -58,4 +58,5 @@ for i in range(start_row_log, last_row_log):
     print("to pull data")
     print("ti test branches")
     print("to pull to another folder")
+    print("push to github from master")
 
